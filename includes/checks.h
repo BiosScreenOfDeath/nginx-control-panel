@@ -1,9 +1,3 @@
-// Class A: 10.0. 0.0 to 10.255. 255.255.
-// Class B: 172.16. 0.0 to 172.31. 255.255.
-// Class C: 192.168. 0.0 to 192.168. 255.255.
-
-// Extra note: Only private network IPs are valid
-
 bool runTests(string IP, int port){
     bool IPCheck = isValidIP(IP);
     bool portCheck = isValidPort(port);
@@ -15,11 +9,6 @@ int isValidIPClassA(vector<string> ip){
     if( !( stoi(ip[1]) >= 0 && ( ( stoi(ip[0]) == 127 && stoi(ip[1]) == 0 ) || (stoi(ip[0]) < 127 && stoi(ip[1]) <= 255) ))){ return false; }
     if( !( stoi(ip[2]) >= 0 && ( ( stoi(ip[0]) == 127 && stoi(ip[2]) == 0 ) || (stoi(ip[0]) < 127 && stoi(ip[2]) <= 255) ))){ return false; }
     if( !( stoi(ip[3]) >= 0 && ( ( stoi(ip[0]) == 127 && stoi(ip[3]) == 0 ) || (stoi(ip[0]) < 127 && stoi(ip[3]) <= 255) ))){ return false; }
-
-    // cout << "\n1: " << !( stoi(ip[0]) >= 1 && stoi(ip[0]) <= 127) << '\n';
-    // cout << "2: " << !( stoi(ip[1]) >= 0 && stoi(ip[1]) <= 255) << '\n';
-    // cout << "3: " << !( stoi(ip[2]) >= 0 && stoi(ip[2]) <= 255) << '\n';
-    // cout << "4: " << !( stoi(ip[3]) >= 0 && stoi(ip[3]) <= 255) << '\n';
 
     return 1;
 }

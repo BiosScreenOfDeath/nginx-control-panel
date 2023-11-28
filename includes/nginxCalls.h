@@ -19,12 +19,29 @@ void runNginx(){
 }
 
 void runCommand(string title, string cmd){
-    int error;
-    if( (error = WinExec(cmd.c_str(), SW_HIDE)) <= 31 ){
-        cout << "Error code: " << error << '\n';
-    } else {
-        cout << title << " successfully running!\n";
-    }
+    
+    STARTUPINFO si;
+    PROCESS_INFORMATION pi;
+
+    ZeroMemory( &si, sizeof(si) );
+    si.cb = sizeof(si);
+    ZeroMemory( &pi, sizeof(pi) );
+
+    if( !CreateProcess( NULL,   // No module name (use command line)
+        cmd.data(),        // Command line
+        NULL,           // Process handle not inheritable
+        NULL,           // Thread handle not inheritable
+        FALSE,          // Set handle inheritance to FALSE
+        CREATE_NO_WINDOW,              // No window flag
+        NULL,           // Use parent's environment block
+        NULL,           // Use parent's starting directory 
+        &si,            // Pointer to STARTUPINFO structure
+        &pi )           // Pointer to PROCESS_INFORMATION structure
+    ) 
+    {
+        printf( "CreateProcess failed (%d).\n", GetLastError() );
+        return;
+    } else { cout << title << " successfully running!\n"; }
 }
 
 void terminateServices(){
